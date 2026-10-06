@@ -3,9 +3,14 @@ services:
     name: kairozen-admin-manager
     runtime: python
     plan: starter
+    region: singapore
     buildCommand: pip install -r requirements.txt
     startCommand: python admin_manager_bot.py
+    healthCheckPath: /
+    autoDeploy: true
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: BOT_TOKEN
         sync: false
       - key: OWNER_ID
@@ -13,8 +18,8 @@ services:
       - key: CHANNEL_ID
         sync: false
       - key: DATA_DIR
-        value: /var/data
+        value: /data
     disk:
-      name: admin-data
-      mountPath: /var/data
+      name: bot-data
+      mountPath: /data
       sizeGB: 1
